@@ -11,7 +11,19 @@
 	<nav th:replace="layouts/base_template :: navi()"></nav>
 
 	<div class="container">
-
+		リストボックスの表示・送信
+		<form th:action="@{/listbox}" method="post">
+			<div class="row">
+				<div class="cols">
+					<select name="month" class="form-control">
+						<option th:each="value : ${listbox}" th:value="${value}" th:text="${value}" th:selected="${month == value}" />
+					</select>
+				</div>
+				<div class="cols">
+					<input type="submit" class="btn btn-primary"/>
+				</div>
+			</div>
+		</form>
 	</div>
 	<script th:replace="layouts/base_template :: jquery()"></script>
 	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
