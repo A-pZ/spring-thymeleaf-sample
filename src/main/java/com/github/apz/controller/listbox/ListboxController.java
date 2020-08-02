@@ -1,4 +1,4 @@
-package com.github.apz.controller;
+package com.github.apz.controller.listbox;
 
 import java.util.List;
 import java.util.stream.Collectors;
