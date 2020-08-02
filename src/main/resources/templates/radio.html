@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Title</title>
+<link  th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+
+	<div class="container">
+		ラジオボタンの表示
+		<input type="radio" name="product1"
+		        th:each="product : ${products}" th:value="${product.id}" th:checked="${product.id == checkedProduct}" th:text="${product.label}" >
+		<hr />
+		Bootstrapのラジオボタン・ラベル表記の形式
+		<div class="custom-control custom-radio" th:each="product : ${products}">
+			<input type="radio" name="product2" class="custom-control-input"
+			        th:id="'customRadio' + ${product.id}" th:value="${product.id}" th:checked="${product.id == checkedProduct}">
+			<label class="custom-control-label"
+			        th:for="'customRadio' + ${product.id}" th:text="${product.label}">custom radio</label>
+		</div>
+	</div>
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+</body>
+</html>
