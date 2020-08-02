@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Title</title>
+<link  th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+
+	<div class="container">
+		Bootstrapのチェックボックスの形式
+		<form th:action="@{/checkbox}" method="post">
+			<div class="custom-control custom-checkbox" th:each="product : ${products}">
+				<input type="checkbox" name="checkedProduct" class="custom-control-input"
+				        th:id="'customCheck' + ${product.id}" th:value="${product.id}" th:checked="${checkedProduct.contains(product.id)}">
+				<label class="custom-control-label"
+				        th:for="'customCheck' + ${product.id}" th:text="${product.label}">custom check</label>
+			</div>
+			<button class="btn btn-primary" type="submit">送信</button>
+		</form>
+	</div>
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+</body>
+</html>
