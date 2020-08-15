@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Title</title>
+<link  th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+
+	<div class="container">
+	表(テーブル)
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>id</th>
+					<th>社員名</th>
+					<th>所属</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${employees}">
+					<td th:text="${employee.id}"></td>
+					<td th:text="${employee.name}"></td>
+					<td th:text="${employee.department}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- ページング -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item" th:if="${page.pageNumber != 0}">
+					<a class="page-link" th:href="@{/pagination?pageNumber={pageNumber}(pageNumber=${page.pageNumber -1})}">Previous</a>
+				</li>
+				<li class="page-item" th:each="number : ${#numbers.sequence(pager.getFirstLinkedPage() ,pager.getLastLinkedPage())}">
+					<a class="page-link" th:href="@{/pagination?pageNumber={pageNumber}(pageNumber=${number})}" th:text="${number +1}"></a>
+				</li>
+				<li class="page-item" th:if="${page.pageNumber != pager.lastLinkedPage}">
+					<a class="page-link" th:href="@{/pagination?pageNumber={pageNumber}(pageNumber=${page.pageNumber +1})}">Next</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+</body>
+</html>
