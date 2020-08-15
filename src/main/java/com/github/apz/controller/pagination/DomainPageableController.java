@@ -1,6 +1,6 @@
 package com.github.apz.controller.pagination;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import com.github.apz.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/pagable")
+@RequestMapping("/pageable")
 @RequiredArgsConstructor
 public class DomainPageableController {
 	private final EmployeeService service;
@@ -20,7 +20,7 @@ public class DomainPageableController {
 	@GetMapping
 	public ModelAndView display(ModelAndView mnv, @PageableDefault(page = 0, size = 5) Pageable pageable) {
 
-		var employees = service.findAll();
+		var employees = service.find(pageable);
 
 		mnv.addObject("employees", employees);
 		mnv.addObject("page", pageable);

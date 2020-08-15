@@ -33,8 +33,8 @@ public class EmployeeService {
 		int pageNumber = pageable.getPageNumber();
 		int pageSize = pageable.getPageSize();
 
-		int start = pageNumber * pageSize;
-		int end = (pageNumber +1 ) * pageSize;
+		int start = pageNumber * pageSize +1;
+		int end = (pageNumber +1 ) * pageSize +1;
 
 		List<Employee> employees = findAll()
 				.stream()

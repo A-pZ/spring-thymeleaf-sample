@@ -11,7 +11,7 @@
 	<nav th:replace="layouts/base_template :: navi()"></nav>
 
 	<div class="container">
-	表(テーブル)
+	表(テーブル):Pageable実装
 		<table class="table table-striped">
 			<thead class="thead-dark">
 				<tr>
@@ -32,13 +32,13 @@
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item" th:if="${page.pageNumber != 0}">
-					<a class="page-link" th:href="@{/pagination?pageNumber={pageNumber}(pageNumber=${page.pageNumber -1})}">Previous</a>
+					<a class="page-link" th:href="@{/pageable?page={page}(page=${page.pageNumber -1})}">Previous</a>
 				</li>
-				<li class="page-item" th:each="number : ${#numbers.sequence(pager.getFirstLinkedPage() ,pager.getLastLinkedPage())}">
-					<a class="page-link" th:href="@{/pagination?pageNumber={pageNumber}(pageNumber=${number})}" th:text="${number +1}"></a>
+				<li class="page-item" th:each="number : ${#numbers.sequence(0 ,page.getOffset())}">
+					<a class="page-link" th:href="@{/pageable?page={page}(page=${number})}" th:text="${number +1}"></a>
 				</li>
-				<li class="page-item" th:if="${page.pageNumber != pager.lastLinkedPage}">
-					<a class="page-link" th:href="@{/pagination?pageNumber={pageNumber}(pageNumber=${page.pageNumber +1})}">Next</a>
+				<li class="page-item" >
+					<a class="page-link" th:href="@{/pageable?page={page}(page=${page.pageNumber +1})}">Next</a>
 				</li>
 			</ul>
 		</nav>
