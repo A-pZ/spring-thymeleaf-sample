@@ -11,17 +11,16 @@
 	<nav th:replace="layouts/base_template :: navi()"></nav>
 
 	<div class="container">
-		<form th:action="@{/validator}" method="post">
+		<form th:action="@{/validator}" method="post" th:object="${form}">
 			<div class="form-group">
 				<label for="email">メールアドレス</label>
-				<input type="text" class="form-control" id="email" name="email" aria-describedby="emailFeedback">
-				<small id="emailHelp" class="form-text text-muted">メールアドレス</small>
-				<div th:if="${#fields.hasErrors('form.email')}" id="emailFeedback" class="invalid-feedback"></div>
+				<input type="text" class="form-control" th:field="*{email}" th:errorclass="is-invalid"  aria-describedby="emailFeedback">
+				<div th:if="${#fields.hasErrors('email')}" id="emailFeedback" class="invalid-feedback" th:errors="*{email}"></div>
 			</div>
 			<div class="form-group">
 				<label for="name">表示名</label>
-				<input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp">
-				<small id="nameHelp" class="form-text text-muted">利用者名</small>
+				<input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid" aria-describedby="nameFeedback">
+				<div th:if="${#fields.hasErrors('name')}" id="nameFeedback" class="invalid-feedback" th:errors="*{name}"></div>
 			</div>
 			<button type="submit" class="btn btn-primary">登録チェック</button>
 		</form>
