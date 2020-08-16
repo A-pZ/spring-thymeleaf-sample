@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Title</title>
+<link  th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+
+	<div class="container">
+		<form th:action="@{/validator}" method="post" th:object="${form}">
+			<div class="form-group">
+				<label for="email">メールアドレス</label>
+				<input type="text" class="form-control" th:field="*{email}" th:errorclass="is-invalid"  aria-describedby="emailFeedback">
+				<div th:if="${#fields.hasErrors('email')}" id="emailFeedback" class="invalid-feedback" th:errors="*{email}"></div>
+			</div>
+			<div class="form-group">
+				<label for="name">表示名</label>
+				<input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid" aria-describedby="nameFeedback">
+				<div th:if="${#fields.hasErrors('name')}" id="nameFeedback" class="invalid-feedback" th:errors="*{name}"></div>
+			</div>
+			<button type="submit" class="btn btn-primary">登録チェック</button>
+		</form>
+	</div>
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+</body>
+</html>
