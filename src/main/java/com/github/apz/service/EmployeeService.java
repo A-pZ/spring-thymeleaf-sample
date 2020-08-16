@@ -2,7 +2,9 @@ package com.github.apz.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.github.apz.view.Employee;
@@ -23,6 +25,22 @@ public class EmployeeService {
 			add( Employee.of(10, "従業員Jさん", "経営部"));
 			add( Employee.of(11, "従業員Kさん", "経営部"));
 		}};
+
+		return employees;
+	}
+
+	public List<Employee> find(Pageable pageable) {
+		int pageNumber = pageable.getPageNumber();
+		int pageSize = pageable.getPageSize();
+
+		int start = pageNumber * pageSize +1;
+		int end = (pageNumber +1 ) * pageSize +1;
+
+		List<Employee> employees = findAll()
+				.stream()
+					.filter(employee -> employee.getId() >= start)
+					.filter(employee -> employee.getId() < end)
+					.collect(Collectors.toList());
 
 		return employees;
 	}
