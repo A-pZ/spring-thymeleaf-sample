@@ -22,6 +22,11 @@
 				<input type="text" class="form-control" th:field="*{name}" th:errorclass="is-invalid" aria-describedby="nameFeedback">
 				<div th:if="${#fields.hasErrors('name')}" id="nameFeedback" class="invalid-feedback" th:errors="*{name}"></div>
 			</div>
+			<div class="form-group">
+				<label for="age">年齢</label>
+				<input type="text" class="form-control" th:field="*{age}" th:errorclass="is-invalid" aria-describedby="ageFeedback">
+				<div th:if="${#fields.hasErrors('age')}" id="ageFeedback" class="invalid-feedback" th:errors="*{age}"></div>
+			</div>
 			<button type="submit" class="btn btn-primary">登録チェック</button>
 		</form>
 	</div>
