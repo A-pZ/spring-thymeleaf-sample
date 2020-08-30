@@ -1,11 +1,13 @@
 package com.github.apz.controller.validator;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +27,7 @@ public class ValidatorController {
 	}
 
 	@PostMapping
-	public ModelAndView check(@ModelAttribute("form") @Validated UserRegisterForm form, BindingResult result, ModelAndView mnv) {
+	public ModelAndView check(@ModelAttribute("form") @Valid UserRegisterForm form, BindingResult result, ModelAndView mnv) {
 		if (result.hasErrors()) {
 			mnv.setViewName("validator");
 			return mnv;
@@ -42,5 +44,8 @@ public class ValidatorController {
 		private String email;
 		@NotEmpty
 		private String name;
+		@Max(99)
+		@Min(10)
+		private Integer age;
 	}
 }
