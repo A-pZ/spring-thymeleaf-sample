@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Title</title>
+<link th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+
+	<div class="container">
+		表(テーブル)
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>id</th>
+					<th>社員名</th>
+					<th>所属</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${employees}">
+					<td><input type="button" class="btn btn-primary" th:data-id="${employee.id}" th:value="${employee.id}" data-toggle="modal" data-target="#exampleModal"></td>
+					<td th:text="${employee.name}"></td>
+					<td th:text="${employee.department}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- modal -->
+	<div class="modal" id="exampleModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">タイトル</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="modalBody">
+					<p>編集しますか？</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal -->
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+	<script>
+	$('#exampleModal').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget);
+		var id = button.data('id');
+		$('#modalBody').text(id + 'を選択しました');
+	});
+	</script>
+</body>
+</html>
