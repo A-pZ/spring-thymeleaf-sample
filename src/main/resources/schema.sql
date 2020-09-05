@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS account (id INT,name VARCHAR(256))
