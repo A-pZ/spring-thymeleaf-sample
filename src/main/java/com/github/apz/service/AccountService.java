@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.apz.entity.Account;
 import com.github.apz.repository.AccountRepository;
+import com.github.apz.repository.NamedQueryAccountRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,12 +16,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountService {
 	private final AccountRepository repository;
+	private final NamedQueryAccountRepository namedRepository;
 
 	public List<Account> search(Integer id) {
 		if (Objects.isNull(id)) {
 			return repository.findAll();
 		}
 
-		return Arrays.asList(repository.findById(id));
+		return Arrays.asList(namedRepository.findById(id));
 	}
 }
