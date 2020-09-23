@@ -5,3 +5,5 @@ spring:
 #  messages:
 #    basename: messages
   datasource:    initialization-mode: embedded
+# mybatis:
+  
