@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Title</title>
+<link  th:replace="layouts/base_template :: bootstrap()" />
+</head>
+<body>
+	<nav th:replace="layouts/base_template :: navi()"></nav>
+
+	<div class="container">
+		<form th:action="@{./complete}" method="post">
+		<div th:text="${userForm.userId}"></div>
+		<div th:text="${userForm.userName}"></div>
+		<input type="submit">
+		</form>
+	</div>
+	<script th:replace="layouts/base_template :: jquery()"></script>
+	<script th:replace="layouts/base_template :: bootstrap_jquery()"></script>
+</body>
+</html>
