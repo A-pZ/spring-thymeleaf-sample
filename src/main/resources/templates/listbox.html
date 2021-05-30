@@ -16,7 +16,7 @@
 			<div class="row">
 				<div class="cols">
 					<select name="month" class="form-control">
-						<option th:each="value : ${listbox}" th:value="${value}" th:text="${value}" th:selected="${month == value}" />
+						<option th:each="value : ${@listbox.createListbox()}" th:value="${value}" th:text="${value}" th:selected="${month == value}" />
 					</select>
 				</div>
 				<div class="cols">
